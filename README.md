@@ -1,5 +1,5 @@
-🛡️ Mini SOC Lab – Splunk SIEM (L1 SOC Analyst Project)
-📌 Project Summary
+Mini SOC Lab – Splunk SIEM (L1 SOC Analyst Project)
+Project Summary
 
 This project simulates a real-world L1 SOC monitoring environment using Splunk Enterprise as the SIEM platform.
 
@@ -17,8 +17,8 @@ Perform basic incident investigation workflow
 
 The environment replicates how an L1 SOC Analyst monitors authentication-based threats in an enterprise network.
 
-🏗️ Lab Environment
-🔹 Infrastructure
+Lab Environment
+Infrastructure
 
 SIEM Server: Ubuntu – Splunk Enterprise
 
@@ -28,7 +28,7 @@ Attacker Machine: Kali Linux
 
 Log Forwarding: Splunk Universal Forwarder
 
-🔹 Log Flow
+Log Flow
 Kali Linux (Attacker)
         ↓
 Windows 10 (Victim – RDP Enabled)
@@ -39,8 +39,8 @@ Splunk Enterprise (SIEM)
 
 Windows Security and System logs were forwarded to Splunk in real time.
 
-⚙️ Configuration Overview
-🔹 Data Collection
+Configuration Overview
+Data Collection
 
 Configured inputs.conf on Windows:
 
@@ -62,20 +62,21 @@ server = <Splunk_Server_IP>:9997
 
 Splunk receiver was enabled on port 9997.
 
-🔍 Use Case 1 – RDP Brute Force Detection
-🛑 Attack Simulation
+Use Case 1 – RDP Brute Force Detection
+Attack Simulation
 
 Used Hydra from Kali Linux to perform an RDP brute-force attack against Windows 10.
 
-🔎 Detection – Failed Logins
+Detection – Failed Logins
 
 Event ID: 4625
+
 Logon Type: 10 (RemoteInteractive – RDP)
 
 index=wineventlog EventCode=4625 Logon_Type=10
 | stats count by Account_Name, Source_Network_Address
 | sort - count
-📊 Observation
+Observation
 
 Multiple failed login attempts detected
 
@@ -85,13 +86,14 @@ Targeting a single user account
 
 This triggered brute-force suspicion.
 
-🔍 Use Case 2 – Successful Login Detection
+Use Case 2 – Successful Login Detection
 
 Event ID: 4624
+
 Logon Type: 10
 
 index=wineventlog EventCode=4624 Logon_Type=10
-📊 Observation
+Observation
 
 Successful login detected from same attacker IP
 
@@ -99,7 +101,7 @@ Correlated with prior 4625 failures
 
 Indicates compromised credentials
 
-🔍 Use Case 3 – New User Creation Monitoring
+Use Case 3 – New User Creation Monitoring
 
 Event ID: 4720
 
@@ -107,7 +109,7 @@ index=wineventlog EventCode=4720
 
 Monitored for unauthorized account creation (Persistence attempt).
 
-🔍 Use Case 4 – Password Reset Monitoring
+Use Case 4 – Password Reset Monitoring
 
 Event ID: 4723, 4724
 
@@ -115,7 +117,7 @@ index=wineventlog (EventCode=4723 OR EventCode=4724)
 
 Used to detect potential account manipulation activity.
 
-🚨 Alert Configuration (L1 SOC Level)
+Alert Configuration (L1 SOC Level)
 
 Configured real-time alerts for:
 
@@ -127,7 +129,7 @@ New account creation
 
 Password reset activity
 
-Alert severity categorized as:
+Alert Severity
 
 Medium – Multiple failed logins
 
@@ -135,7 +137,7 @@ High – Successful login after brute force
 
 High – Unauthorized account creation
 
-🧠 Investigation Workflow (L1 SOC Process)
+Investigation Workflow (L1 SOC Process)
 
 When alert triggered:
 
@@ -151,12 +153,12 @@ Correlated timestamps
 
 Escalated as confirmed brute-force compromise
 
-🛡️ MITRE ATT&CK Mapping
+MITRE ATT&CK Mapping
 Technique	ID	Description
 Brute Force	T1110	Repeated password attempts
 Valid Accounts	T1078	Successful credential usage
 Create Account	T1136	Persistence mechanism
-📊 Dashboard Panels Created
+Dashboard Panels Created
 
 Failed Login Trend
 
@@ -170,7 +172,7 @@ Password Changes
 
 Authentication Activity Timeline
 
-📈 Detection Outcome
+Detection Outcome
 
 During simulation:
 
@@ -182,9 +184,9 @@ Clear correlation between brute-force attempts and account compromise
 
 Alerts triggered as expected
 
-🎯 Skills Demonstrated (L1 SOC Role)
+Skills Demonstrated (L1 SOC Role)
 
-Log Monitoring & Analysis
+Log Monitoring and Analysis
 
 Event ID Investigation
 
@@ -200,7 +202,7 @@ Incident Correlation
 
 MITRE ATT&CK Understanding
 
-📚 Key Learning
+Key Learning
 
 Understanding Windows Authentication Logs
 
@@ -212,7 +214,7 @@ Performing L1-level incident validation
 
 Building practical SIEM monitoring use cases
 
-👨‍💻 Author
+Author
 
 Akash Reddy A K
 Aspiring SOC Analyst | SIEM & Log Monitoring Enthusiast
