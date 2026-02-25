@@ -1,4 +1,5 @@
-# mini-soc-lab
+Mini SOC Lab – Splunk SIEM 
+
 Project Summary
 
 This project simulates a real-world L1 SOC monitoring environment using Splunk Enterprise as the SIEM platform.
@@ -17,8 +18,7 @@ Perform basic incident investigation workflow
 
 The environment reflects the day-to-day responsibilities of an L1 SOC Analyst handling authentication-related security events.
 
-Lab Environment
-Infrastructure
+Lab Environment Infrastructure
 
 SIEM Server: Ubuntu – Splunk Enterprise
 
@@ -29,12 +29,13 @@ Attacker Machine: Kali Linux
 Log Forwarding: Splunk Universal Forwarder
 
 Log Flow Architecture
+
 Kali Linux (Attacker)
-        ↓
+↓
 Windows 10 (Victim – RDP Enabled)
-        ↓
+↓
 Splunk Universal Forwarder
-        ↓
+↓
 Splunk Enterprise (SIEM)
 
 Windows Security and System logs were forwarded to Splunk in real time.
@@ -70,6 +71,7 @@ A brute-force attack was performed using Hydra from Kali Linux against the Windo
 Detection – Failed Logins
 
 Event ID: 4625
+
 Logon Type: 10 (RemoteInteractive – RDP)
 
 index=wineventlog EventCode=4625 Logon_Type=10
@@ -88,6 +90,7 @@ This activity indicated a brute-force attempt.
 Use Case 2 – Successful Login Detection
 
 Event ID: 4624
+
 Logon Type: 10
 
 index=wineventlog EventCode=4624 Logon_Type=10
@@ -127,7 +130,7 @@ New account creation
 
 Password reset activity
 
-Alert severity classification:
+Alert Severity Classification
 
 Medium: Multiple failed login attempts
 
@@ -215,5 +218,4 @@ Building practical SIEM detection use cases
 Author
 
 Akash Reddy A K
-Aspiring SOC Analyst | SIEM and Log Monitoring
-Cybersecurity Enthusiast  
+Aspiring SOC Analyst | SIEM and Log Monitoring | Cybersecurity Enthusiast
